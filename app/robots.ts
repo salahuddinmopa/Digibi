@@ -1,0 +1,16 @@
+import { MetadataRoute } from "next";
+
+const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://digiblygroup.com.au";
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/client-portal/", "/api/"],
+      },
+    ],
+    sitemap: `${BASE}/sitemap.xml`,
+  };
+}

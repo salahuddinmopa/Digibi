@@ -62,7 +62,8 @@ export default function BlogPage() {
                   category={post.category}
                   date={post.date}
                   readTime={post.readTime}
-                  image={post.image}
+                  image={post.heroImage || post.image}
+                  imageAlt={post.heroAlt}
                   featured={i === 0}
                 />
               </ScrollReveal>

@@ -1,7 +1,5 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const FROM = "Digibly Group <noreply@digiblygroup.com.au>";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "hello@digiblygroup.com.au";
 
@@ -24,6 +22,8 @@ export async function sendContactEmail(data: {
     console.log("Email skipped — no valid Resend API key");
     return { success: true };
   }
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   try {
     await resend.emails.send({
@@ -70,6 +70,8 @@ export async function sendQuoteEmail(data: Record<string, unknown>, clientEmail:
     console.log("Quote email skipped — no valid Resend API key");
     return { success: true };
   }
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   const rows = Object.entries(data)
     .filter(([, v]) => v !== undefined && v !== null && v !== "")

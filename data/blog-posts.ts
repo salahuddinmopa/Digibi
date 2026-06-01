@@ -7,6 +7,14 @@ export interface BlogPost {
   readTime: string;
   author: string;
   image?: string;
+  heroImage?: string;
+  heroAlt?: string;
+  inArticleImages?: Array<{
+    src: string;
+    alt: string;
+    caption: string;
+    position: 'after-intro' | 'after-section-2';
+  }>;
   content: string;
 }
 
@@ -20,6 +28,22 @@ export const blogPosts: BlogPost[] = [
     date: "12 May 2026",
     readTime: "6 min read",
     author: "Digibly Group",
+    heroImage: '/images/blog/blog-website-costing-clients-hero.png',
+    heroAlt: 'A cluttered outdated website on a laptop — the hidden reason businesses lose clients',
+    inArticleImages: [
+      {
+        src: '/images/blog/blog-website-costing-clients-2.png',
+        alt: 'Declining analytics report representing lost business from poor website performance',
+        caption: 'Poor website performance directly translates to lost revenue — often without the business owner realising.',
+        position: 'after-intro' as const,
+      },
+      {
+        src: '/images/blog/blog-website-costing-clients-3.png',
+        alt: 'A beautifully designed dark luxury website on a MacBook — what a converting website looks like',
+        caption: 'A well-crafted website communicates trust instantly — before a single word is read.',
+        position: 'after-section-2' as const,
+      },
+    ],
     content: `
 ## The First Impression You Don't Control
 
@@ -79,6 +103,22 @@ Seen through that lens, a slow or outdated website isn't a minor inconvenience. 
     readTime: "9 min read",
     author: "Digibly Group",
     image: "/images/analytics-reporting.png",
+    heroImage: '/images/blog/blog-google-ads-hero.png',
+    heroAlt: 'Google Ads campaign dashboards on multiple monitors — professional digital marketing optimisation',
+    inArticleImages: [
+      {
+        src: '/images/blog/blog-google-ads-2.png',
+        alt: 'Google Ads quality score dashboard showing 9/10 with green indicators',
+        caption: 'Quality Score is the single biggest lever in Google Ads — improving it cuts your cost per click dramatically.',
+        position: 'after-intro' as const,
+      },
+      {
+        src: '/images/blog/blog-google-ads-3.png',
+        alt: 'Before and after optimisation reports showing dramatic improvement in campaign ROI',
+        caption: 'The difference between an unoptimised and optimised account is often 3x the results for the same spend.',
+        position: 'after-section-2' as const,
+      },
+    ],
     content: `
 ## Why Most Australian Google Ads Accounts Underperform
 
@@ -153,6 +193,22 @@ Google Ads is not a "set and forget" channel. The businesses extracting the best
     date: "15 Apr 2026",
     readTime: "8 min read",
     author: "Digibly Group",
+    heroImage: '/images/blog/blog-cybersecurity-governance-hero.png',
+    heroAlt: 'Dark data centre corridor with illuminated server racks — representing cybersecurity infrastructure',
+    inArticleImages: [
+      {
+        src: '/images/blog/blog-cybersecurity-governance-2.png',
+        alt: 'Cybersecurity governance maturity framework diagram in an open premium notebook',
+        caption: 'A governance framework gives your organisation a structured pathway from reactive to proactive security.',
+        position: 'after-intro' as const,
+      },
+      {
+        src: '/images/blog/blog-cybersecurity-governance-3.png',
+        alt: 'Cracked digital security shield on a monitor screen — representing a cybersecurity breach',
+        caption: 'The average cost of a data breach for Australian SMEs is $3.35 million — most never fully recover.',
+        position: 'after-section-2' as const,
+      },
+    ],
     content: `
 ## Why Governance Is No Longer Optional
 
@@ -220,6 +276,22 @@ The question is no longer whether governance investment is justified — it's ho
     date: "2 Apr 2026",
     readTime: "5 min read",
     author: "Digibly Group",
+    heroImage: '/images/blog/blog-brand-identity-hero.png',
+    heroAlt: 'Comparison between cheap inconsistent branding and premium professional brand identity materials',
+    inArticleImages: [
+      {
+        src: '/images/blog/blog-brand-identity-2.png',
+        alt: 'Premium brand identity set — matte black business cards, gold foil logo, brand guidelines book',
+        caption: 'A complete brand identity system signals permanence and professionalism to every potential client.',
+        position: 'after-intro' as const,
+      },
+      {
+        src: '/images/blog/blog-brand-identity-3.png',
+        alt: 'Two business cards side by side — cheap generic versus premium matte black with gold foil',
+        caption: 'Clients make a trust judgement about your brand within 7 seconds — your materials cannot be an afterthought.',
+        position: 'after-section-2' as const,
+      },
+    ],
     content: `
 ## Brand as an Economic Asset
 
@@ -331,6 +403,22 @@ For the businesses we manage, average results include follower growth of 150–3
     date: "18 Mar 2026",
     readTime: "7 min read",
     author: "Digibly Group",
+    heroImage: '/images/blog/blog-choose-agency-hero.png',
+    heroAlt: 'Multiple agency proposals spread on a conference table being carefully evaluated',
+    inArticleImages: [
+      {
+        src: '/images/blog/blog-choose-agency-2.png',
+        alt: 'Handwritten agency evaluation checklist with gold pen on dark leather desk pad',
+        caption: 'A structured evaluation process separates agencies that talk well from those that deliver consistently.',
+        position: 'after-intro' as const,
+      },
+      {
+        src: '/images/blog/blog-choose-agency-3.png',
+        alt: 'Contract document being reviewed with amber highlighted sections and red pen',
+        caption: 'Always review contracts for scope creep clauses, IP ownership terms, and revision policy before signing.',
+        position: 'after-section-2' as const,
+      },
+    ],
     content: `
 ## The Problem With the Australian Agency Market
 
@@ -396,6 +484,22 @@ Cheap isn't always bad. Expensive isn't always good. What matters is alignment b
     date: "5 Mar 2026",
     readTime: "8 min read",
     author: "Digibly Group",
+    heroImage: '/images/blog/blog-ai-threat-detection-hero.png',
+    heroAlt: 'AI-powered threat detection dashboard displaying network topology and real-time threat indicators',
+    inArticleImages: [
+      {
+        src: '/images/blog/blog-ai-threat-detection-2.png',
+        alt: 'Abstract neural network visualisation showing AI anomaly detection — gold and blue nodes',
+        caption: 'Modern AI threat detection analyses millions of network events per second — identifying anomalies invisible to human analysts.',
+        position: 'after-intro' as const,
+      },
+      {
+        src: '/images/blog/blog-ai-threat-detection-3.png',
+        alt: 'AI governance maturity model diagram on a tablet beside open policy documents',
+        caption: 'Deploying AI for threat detection without a governance framework creates new risks while solving old ones.',
+        position: 'after-section-2' as const,
+      },
+    ],
     content: `
 ## The Promise and the Complication
 

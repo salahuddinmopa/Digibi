@@ -439,3 +439,16 @@ a {
   bottom: 12px; right: 12px;
   border-width: 0 1px 1px 0;
 }
+
+/* Blog hero responsive height */
+@media (max-width: 768px) {
+  .blog-hero-image {
+    height: 40vh !important;
+    min-height: 240px !important;
+  }
+  .blog-hero-overlay {
+    left: 1.5rem !important;
+    bottom: 24px !important;
+    right: 1rem;
+  }
+}

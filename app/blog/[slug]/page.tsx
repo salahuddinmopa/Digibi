@@ -6,6 +6,7 @@ import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import BlogCard from "@/components/ui/BlogCard";
 import ShareButton from "@/components/ui/ShareButton";
+import { ArticleImage } from "@/components/ui/ArticleImage";
 import { blogPosts, getBlogPostBySlug } from "@/data/blog-posts";
 
 interface Props {
@@ -25,6 +26,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+type ContentItem =
+  | { kind: 'line'; value: string }
+  | { kind: 'image'; src: string; alt: string; caption: string };
+
 export default function BlogPostPage({ params }: Props) {
   const post = getBlogPostBySlug(params.slug);
   if (!post) notFound();
@@ -33,49 +38,104 @@ export default function BlogPostPage({ params }: Props) {
     (p) => p.slug !== post.slug && (p.category === post.category || Math.random() > 0.3)
   ).slice(0, 3);
 
-  const contentLines = post.content.split("\n");
+  const afterIntroImg = post.inArticleImages?.find((img) => img.position === 'after-intro');
+  const afterSection2Img = post.inArticleImages?.find((img) => img.position === 'after-section-2');
+
+  // Pre-process content lines to inject image sentinels before 2nd and 3rd ## headings
+  const rawLines = post.content.split("\n");
+  let h2Count = 0;
+  const contentItems: ContentItem[] = [];
+  for (const line of rawLines) {
+    if (line.startsWith('## ')) {
+      h2Count++;
+      if (h2Count === 2 && afterIntroImg) {
+        contentItems.push({ kind: 'image', src: afterIntroImg.src, alt: afterIntroImg.alt, caption: afterIntroImg.caption });
+      }
+      if (h2Count === 3 && afterSection2Img) {
+        contentItems.push({ kind: 'image', src: afterSection2Img.src, alt: afterSection2Img.alt, caption: afterSection2Img.caption });
+      }
+    }
+    contentItems.push({ kind: 'line', value: line });
+  }
 
   return (
     <>
       {/* Hero */}
-      <section
-        className="relative pt-40 pb-16 overflow-hidden"
-        style={{ background: "var(--bg-secondary)" }}
-      >
-        <div className="container-wide relative z-10 max-w-4xl">
-          <ScrollReveal direction="none">
-            <nav className="flex items-center gap-3 mb-8" aria-label="Breadcrumb">
+      {post.heroImage ? (
+        <section className="relative overflow-hidden blog-hero-section" style={{ background: 'var(--bg-secondary)' }}>
+          {/* Breadcrumb nav — overlaid on hero */}
+          <div className="absolute top-0 left-0 right-0 z-10 pt-32 pb-4 px-16">
+            <nav className="flex items-center gap-3 container-wide" aria-label="Breadcrumb">
               <Link
                 href="/blog"
                 className="flex items-center gap-2 text-xs uppercase tracking-label transition-colors"
-                style={{ color: "var(--muted)" }}
+                style={{ color: 'rgba(255,255,255,0.7)' }}
               >
                 <ArrowLeft size={12} />
                 All Articles
               </Link>
-              <span style={{ color: "var(--gold)", fontSize: "0.4rem" }}>◆</span>
-              <span className="text-xs uppercase tracking-label" style={{ color: "var(--gold)" }}>
+              <span style={{ color: 'var(--gold)', fontSize: '0.4rem' }}>◆</span>
+              <span className="text-xs uppercase tracking-label" style={{ color: 'var(--gold)' }}>
                 {post.category}
               </span>
             </nav>
-          </ScrollReveal>
+          </div>
 
-          <ScrollReveal>
-            <h1
-              className="font-display mb-6"
-              style={{
-                fontSize: "clamp(2rem, 4vw, 4rem)",
+          {/* Full-bleed hero image */}
+          <div
+            className="relative w-full blog-hero-image"
+            style={{ height: '55vh', minHeight: 320, overflow: 'hidden' }}
+          >
+            <Image
+              src={post.heroImage}
+              alt={post.heroAlt || post.title}
+              fill
+              priority
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              sizes="100vw"
+            />
+            {/* Bottom gradient — content emerges from below */}
+            <div style={{
+              position: 'absolute',
+              bottom: 0, left: 0, right: 0,
+              height: '200px',
+              background: 'linear-gradient(to top, var(--bg-secondary) 0%, transparent 100%)',
+            }} />
+
+            {/* Post meta overlaid at bottom of hero */}
+            <div className="blog-hero-overlay" style={{ position: 'absolute', bottom: '32px', left: '64px', zIndex: 2 }}>
+              <span style={{
+                background: 'var(--gold-primary)',
+                color: 'var(--bg-primary)',
+                fontSize: '9px',
+                fontWeight: 700,
+                letterSpacing: '0.16em',
+                textTransform: 'uppercase',
+                padding: '5px 14px',
+                borderRadius: '2px',
+                marginBottom: '14px',
+                display: 'inline-block',
+              }}>
+                {post.category}
+              </span>
+              <h1 style={{
+                fontFamily: 'var(--font-cormorant)',
+                fontSize: 'clamp(2rem, 4vw, 3.2rem)',
                 fontWeight: 300,
-                color: "var(--gold-light)",
-                lineHeight: 1.1,
-              }}
-            >
-              {post.title}
-            </h1>
-          </ScrollReveal>
+                color: 'var(--text-primary, #f0e8d8)',
+                letterSpacing: '-0.02em',
+                lineHeight: 1.15,
+                maxWidth: '720px',
+                marginTop: '12px',
+              }}>
+                {post.title}
+              </h1>
+            </div>
+          </div>
 
-          <ScrollReveal delay={0.1}>
-            <div className="flex flex-wrap items-center gap-6 text-xs" style={{ color: "var(--muted)" }}>
+          {/* Date / author meta strip */}
+          <div className="container-wide py-6">
+            <div className="flex flex-wrap items-center gap-6 text-xs max-w-4xl" style={{ color: 'var(--muted)' }}>
               <span className="flex items-center gap-2">
                 <Calendar size={12} />
                 {post.date}
@@ -84,15 +144,69 @@ export default function BlogPostPage({ params }: Props) {
                 <Clock size={12} />
                 {post.readTime}
               </span>
-              <span style={{ color: "var(--warm)" }}>{post.author}</span>
+              <span style={{ color: 'var(--warm)' }}>{post.author}</span>
             </div>
-          </ScrollReveal>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "var(--border)" }} />
-      </section>
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'var(--border)' }} />
+        </section>
+      ) : (
+        /* Fallback — plain text hero for posts without heroImage */
+        <section
+          className="relative pt-40 pb-16 overflow-hidden"
+          style={{ background: "var(--bg-secondary)" }}
+        >
+          <div className="container-wide relative z-10 max-w-4xl">
+            <ScrollReveal direction="none">
+              <nav className="flex items-center gap-3 mb-8" aria-label="Breadcrumb">
+                <Link
+                  href="/blog"
+                  className="flex items-center gap-2 text-xs uppercase tracking-label transition-colors"
+                  style={{ color: "var(--muted)" }}
+                >
+                  <ArrowLeft size={12} />
+                  All Articles
+                </Link>
+                <span style={{ color: "var(--gold)", fontSize: "0.4rem" }}>◆</span>
+                <span className="text-xs uppercase tracking-label" style={{ color: "var(--gold)" }}>
+                  {post.category}
+                </span>
+              </nav>
+            </ScrollReveal>
 
-      {/* Featured image — if available */}
-      {post.image && (
+            <ScrollReveal>
+              <h1
+                className="font-display mb-6"
+                style={{
+                  fontSize: "clamp(2rem, 4vw, 4rem)",
+                  fontWeight: 300,
+                  color: "var(--gold-light)",
+                  lineHeight: 1.1,
+                }}
+              >
+                {post.title}
+              </h1>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.1}>
+              <div className="flex flex-wrap items-center gap-6 text-xs" style={{ color: "var(--muted)" }}>
+                <span className="flex items-center gap-2">
+                  <Calendar size={12} />
+                  {post.date}
+                </span>
+                <span className="flex items-center gap-2">
+                  <Clock size={12} />
+                  {post.readTime}
+                </span>
+                <span style={{ color: "var(--warm)" }}>{post.author}</span>
+              </div>
+            </ScrollReveal>
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "var(--border)" }} />
+        </section>
+      )}
+
+      {/* Legacy featured image for posts using old `image` field (no heroImage) */}
+      {!post.heroImage && post.image && (
         <div className="relative overflow-hidden" style={{ height: "50vh", minHeight: 280 }}>
           <Image
             src={post.image}
@@ -133,9 +247,22 @@ export default function BlogPostPage({ params }: Props) {
                 {post.excerpt}
               </p>
 
-              {/* Rendered content */}
+              {/* Rendered content with injected images */}
               <div className="prose-digibly">
-                {contentLines.map((line, i) => {
+                {contentItems.map((item, i) => {
+                  if (item.kind === 'image') {
+                    return (
+                      <ArticleImage
+                        key={`img-${i}`}
+                        src={item.src}
+                        alt={item.alt}
+                        caption={item.caption}
+                      />
+                    );
+                  }
+
+                  const line = item.value;
+
                   if (line.startsWith("## ")) {
                     return (
                       <h2
@@ -277,7 +404,8 @@ export default function BlogPostPage({ params }: Props) {
                   category={p.category}
                   date={p.date}
                   readTime={p.readTime}
-                  image={p.image}
+                  image={p.heroImage || p.image}
+                  imageAlt={p.heroAlt}
                 />
               </ScrollReveal>
             ))}

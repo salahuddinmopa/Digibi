@@ -10,6 +10,7 @@ interface BlogCardProps {
   date: string;
   readTime: string;
   image?: string;
+  imageAlt?: string;
   featured?: boolean;
 }
 
@@ -21,15 +22,15 @@ export default function BlogCard({
   date,
   readTime,
   image,
-  featured = false,
+  imageAlt,
 }: BlogCardProps) {
   return (
     <Link href={`/blog/${slug}`} className="group block gold-card overflow-hidden">
       {/* Image */}
-      <div className="relative overflow-hidden" style={{ height: featured ? 280 : 220 }}>
+      <div className="relative overflow-hidden" style={{ aspectRatio: '16/9', borderRadius: '12px 12px 0 0', backgroundColor: 'var(--bg-secondary)' }}>
         <Image
-          src={image || `https://placehold.co/800x400/1c1a17/c9a84c?text=${encodeURIComponent(category)}`}
-          alt={title}
+          src={image || `https://placehold.co/800x450/1c1a17/c9a84c?text=${encodeURIComponent(category)}`}
+          alt={imageAlt || title}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -38,17 +39,19 @@ export default function BlogCard({
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to top, rgba(14,13,11,0.8) 0%, transparent 60%)",
+              "linear-gradient(to top, rgba(14,13,11,0.6) 0%, transparent 60%)",
           }}
         />
         {/* Category badge */}
-        <div className="absolute top-4 left-4">
+        <div className="absolute top-3 left-3">
           <span
             className="text-xs uppercase tracking-label px-3 py-1"
             style={{
-              background: "rgba(201,168,76,0.15)",
-              border: "1px solid rgba(201,168,76,0.3)",
-              color: "var(--gold)",
+              background: "var(--gold-primary)",
+              color: "var(--bg-primary)",
+              fontWeight: 700,
+              letterSpacing: '0.14em',
+              borderRadius: '2px',
             }}
           >
             {category}

@@ -60,7 +60,7 @@ export default function ContactPage() {
       <section className="section-padding" style={{ background: "var(--bg-primary)" }}>
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Left — info */}
+            {/* Left — info (dark) */}
             <div>
               <ScrollReveal>
                 <p className="text-xs uppercase tracking-label mb-6" style={{ color: "var(--gold)" }}>
@@ -163,10 +163,10 @@ export default function ContactPage() {
               </ScrollReveal>
             </div>
 
-            {/* Right — form */}
-            <div>
+            {/* Right — form (light) */}
+            <div className="section-light rounded-xl p-8 -m-8 lg:m-0 lg:p-0 lg:rounded-none lg:bg-transparent">
               <ScrollReveal delay={0.1}>
-                <p className="text-xs uppercase tracking-label mb-6" style={{ color: "var(--gold)" }}>
+                <p className="text-xs uppercase tracking-label mb-6" style={{ color: "var(--gold-primary)" }}>
                   Send Us a Message
                 </p>
                 <ContactForm />

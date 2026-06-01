@@ -29,8 +29,8 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: "var(--bg-secondary)",
-        borderTop: "1px solid var(--border)",
+        background: "#100e09",
+        borderTop: "2px solid rgba(201,168,76,0.25)",
       }}
     >
       <div className="container-wide py-16">
@@ -40,9 +40,15 @@ export default function Footer() {
             <Link href="/" className="inline-block mb-4">
               <span
                 className="font-display text-2xl"
-                style={{ color: "var(--gold-light)", fontWeight: 400 }}
+                style={{ color: "var(--gold-bright)", fontWeight: 500 }}
               >
-                Digibly Group
+                Digibly{" "}
+              </span>
+              <span
+                className="font-display text-2xl"
+                style={{ color: "var(--text-secondary)", fontWeight: 300, opacity: 0.8 }}
+              >
+                Group
               </span>
             </Link>
             <p
@@ -64,18 +70,22 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-8 h-8 flex items-center justify-center transition-colors duration-200"
+                  className="flex items-center justify-center transition-all duration-200"
                   style={{
-                    color: "var(--muted)",
-                    border: "1px solid var(--border-subtle)",
+                    width: 38, height: 38,
+                    color: "var(--text-dim)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    borderRadius: 6,
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.color = "var(--gold)";
-                    (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
+                    (e.currentTarget as HTMLElement).style.color = "var(--gold-primary)";
+                    (e.currentTarget as HTMLElement).style.borderColor = "var(--gold-border)";
+                    (e.currentTarget as HTMLElement).style.background = "var(--gold-bg)";
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.color = "var(--muted)";
-                    (e.currentTarget as HTMLElement).style.borderColor = "var(--border-subtle)";
+                    (e.currentTarget as HTMLElement).style.color = "var(--text-dim)";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
+                    (e.currentTarget as HTMLElement).style.background = "transparent";
                   }}
                 >
                   <Icon size={14} />
@@ -87,8 +97,8 @@ export default function Footer() {
           {/* Services */}
           <div>
             <h4
-              className="text-xs uppercase tracking-label mb-6"
-              style={{ color: "var(--gold)" }}
+              className="text-xs uppercase mb-6"
+              style={{ color: "var(--gold-primary)", letterSpacing: "0.22em" }}
             >
               Services
             </h4>
@@ -110,8 +120,8 @@ export default function Footer() {
           {/* Studio */}
           <div>
             <h4
-              className="text-xs uppercase tracking-label mb-6"
-              style={{ color: "var(--gold)" }}
+              className="text-xs uppercase mb-6"
+              style={{ color: "var(--gold-primary)", letterSpacing: "0.22em" }}
             >
               Studio
             </h4>
@@ -133,8 +143,8 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4
-              className="text-xs uppercase tracking-label mb-6"
-              style={{ color: "var(--gold)" }}
+              className="text-xs uppercase mb-6"
+              style={{ color: "var(--gold-primary)", letterSpacing: "0.22em" }}
             >
               Get in Touch
             </h4>

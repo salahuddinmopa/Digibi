@@ -25,9 +25,9 @@ export default function PricingPage() {
       {/* Pricing Tiers */}
       <section className="section-padding" style={{ background: "var(--bg-primary)" }}>
         <div className="container-wide">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
             {pricingTiers.map((tier, i) => (
-              <ScrollReveal key={tier.id} delay={i * 0.12}>
+              <ScrollReveal key={tier.id} delay={i * 0.12} className="h-full">
                 <PricingCard
                   name={tier.name}
                   price={tier.price}
@@ -134,8 +134,8 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="section-padding" style={{ background: "var(--bg-primary)" }}>
+      {/* FAQ — LIGHT */}
+      <section className="section-padding section-light">
         <div className="container-wide max-w-3xl">
           <ScrollReveal direction="none">
             <p className="text-xs uppercase tracking-label mb-4" style={{ color: "var(--gold)" }}>
@@ -187,30 +187,27 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section
-        className="py-24 text-center"
-        style={{ background: "var(--bg-secondary)", borderTop: "1px solid var(--border)" }}
-      >
+      {/* CTA — LIGHT */}
+      <section className="py-24 text-center section-light">
         <div className="container-wide">
           <ScrollReveal>
             <h2
               className="font-display mb-6"
-              style={{ fontSize: "clamp(2rem, 3vw, 3rem)", fontWeight: 300, color: "var(--gold-light)", lineHeight: 1.1 }}
+              style={{ fontSize: "clamp(2rem, 3vw, 3rem)", fontWeight: 300, color: "var(--text-on-light)", lineHeight: 1.1 }}
             >
               Not sure which plan?
-              <em className="block" style={{ fontStyle: "italic", color: "var(--cream)" }}>
+              <em className="block" style={{ fontStyle: "italic", color: "var(--gold-dim)" }}>
                 Let&apos;s figure it out together.
               </em>
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
-            <p className="text-sm mb-8 mx-auto" style={{ color: "var(--warm)", maxWidth: "440px", lineHeight: 1.7 }}>
+            <p className="text-sm mb-8 mx-auto" style={{ color: "var(--text-on-light-body)", maxWidth: "440px", lineHeight: 1.7 }}>
               Submit your brief and we&apos;ll recommend the right package for your specific goals and budget.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
-            <Link href="/get-a-quote" className="btn-gold">
+            <Link href="/get-a-quote" className="btn-dark-gold">
               Get a Custom Quote
             </Link>
           </ScrollReveal>

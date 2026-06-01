@@ -6,6 +6,7 @@ interface MarqueeTickerProps {
   separator?: string;
   className?: string;
   reverse?: boolean;
+  darkText?: boolean;
 }
 
 export default function MarqueeTicker({
@@ -14,8 +15,12 @@ export default function MarqueeTicker({
   separator = "◆",
   className = "",
   reverse = false,
+  darkText = false,
 }: MarqueeTickerProps) {
   const doubledItems = [...items, ...items];
+
+  const textColor = darkText ? "var(--bg-primary)" : "var(--warm)";
+  const dotColor  = darkText ? "rgba(26,23,16,0.4)" : "var(--gold)";
 
   return (
     <div
@@ -30,10 +35,13 @@ export default function MarqueeTicker({
       >
         {doubledItems.map((item, i) => (
           <span key={i} className="inline-flex items-center gap-6 px-6">
-            <span className="font-display italic text-warm text-sm tracking-wide">
+            <span
+              className="font-display italic text-sm tracking-wide"
+              style={{ color: textColor, fontWeight: darkText ? 600 : 300, letterSpacing: "0.06em" }}
+            >
               {item}
             </span>
-            <span className="text-gold text-xs opacity-60">{separator}</span>
+            <span className="text-xs" style={{ color: dotColor }}>{separator}</span>
           </span>
         ))}
       </div>

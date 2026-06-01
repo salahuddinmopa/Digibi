@@ -72,22 +72,22 @@ export default function HomePage() {
     <>
       <HeroSection stats={stats} />
 
-      {/* Marquee ticker */}
+      {/* Marquee ticker — gold band */}
       <div
-        className="py-5 overflow-hidden"
+        className="overflow-hidden"
         style={{
-          background: "var(--bg-secondary)",
-          borderTop: "1px solid var(--border)",
-          borderBottom: "1px solid var(--border)",
+          background: "var(--gold-primary)",
+          borderTop: "none",
+          borderBottom: "none",
+          padding: "14px 0",
         }}
       >
-        <MarqueeTicker items={marqueeItems} />
+        <MarqueeTicker items={marqueeItems} darkText />
       </div>
 
-      {/* Services Section */}
+      {/* Services Section — LIGHT */}
       <section
-        className="section-padding"
-        style={{ background: "var(--bg-primary)" }}
+        className="section-padding section-light"
         aria-labelledby="services-heading"
       >
         <div className="container-wide">
@@ -352,39 +352,58 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Climate Pledge Section */}
+      {/* Climate Pledge Section — vivid reef image */}
       <section
         className="section-padding relative overflow-hidden"
-        style={{
-          background: "var(--bg-primary)",
-          borderTop: "1px solid rgba(201,168,76,0.2)",
-          borderBottom: "1px solid rgba(201,168,76,0.2)",
-        }}
         aria-labelledby="climate-heading"
+        style={{ background: "var(--bg-light)" }}
       >
-        {/* Reef image — desaturated bg */}
-        <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+        {/* Layer 1 — reef image, vivid and visible */}
+        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }} aria-hidden="true">
           <Image
             src="/images/climate-reef.png"
-            alt=""
+            alt="Great Barrier Reef — what the Digibly Climate Pledge works to protect"
             fill
-            quality={40}
+            quality={85}
             placeholder="blur"
             blurDataURL={blurData.climateReef}
-            className="object-cover object-center"
-            style={{ filter: "saturate(0.7) brightness(0.35)", opacity: 0.5 }}
+            className="object-cover"
+            style={{ objectPosition: "center 35%", filter: "saturate(1.15) brightness(0.72)", opacity: 1 }}
             sizes="100vw"
           />
-          <div className="absolute inset-0" style={{ background: "rgba(14,13,11,0.6)" }} />
         </div>
-        <div className="container-wide relative z-10">
+
+        {/* Layer 2 — left-to-right gradient: opaque left (text), transparent right (reef) */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            zIndex: 1,
+            background: "linear-gradient(to right, rgba(247,243,235,0.96) 0%, rgba(247,243,235,0.88) 28%, rgba(247,243,235,0.55) 52%, rgba(247,243,235,0.18) 72%, rgba(247,243,235,0.04) 100%)",
+          }}
+        />
+
+        {/* Layer 3 — top vignette */}
+        <div
+          className="absolute top-0 left-0 right-0 pointer-events-none"
+          style={{ height: 80, zIndex: 2, background: "linear-gradient(to bottom, rgba(247,243,235,0.55) 0%, transparent 100%)" }}
+        />
+
+        {/* Layer 4 — bottom vignette */}
+        <div
+          className="absolute bottom-0 left-0 right-0 pointer-events-none"
+          style={{ height: 100, zIndex: 2, background: "linear-gradient(to top, rgba(247,243,235,0.6) 0%, transparent 100%)" }}
+        />
+
+        {/* Content — above all layers */}
+        <div className="container-wide relative" style={{ zIndex: 3 }}>
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-center">
-            {/* Left — 60% */}
+
+            {/* Left — text (60%) */}
             <div className="lg:col-span-3">
               <ScrollReveal direction="none">
                 <div className="flex items-center gap-2 mb-4">
-                  <Leaf size={14} style={{ color: "var(--gold)" }} />
-                  <p className="text-xs uppercase tracking-label" style={{ color: "var(--gold)" }}>
+                  <Leaf size={14} style={{ color: "var(--gold-primary)", flexShrink: 0 }} />
+                  <p className="text-xs uppercase tracking-label" style={{ color: "var(--gold-primary)", letterSpacing: "0.18em" }}>
                     Digibly Climate Pledge
                   </p>
                 </div>
@@ -393,86 +412,112 @@ export default function HomePage() {
                 <h2
                   id="climate-heading"
                   className="font-display mb-6"
-                  style={{ fontSize: "clamp(2rem, 3.5vw, 3.5rem)", fontWeight: 300, color: "var(--gold-light)", lineHeight: 1.1 }}
+                  style={{ fontSize: "clamp(2rem, 3.5vw, 3.5rem)", fontWeight: 300, color: "var(--text-on-light)", lineHeight: 1.1 }}
                 >
                   5% of Every Project
-                  <em className="block" style={{ fontStyle: "italic", color: "var(--cream)" }}>
+                  <em className="block" style={{ fontStyle: "italic", color: "var(--gold-dim)" }}>
                     Goes to the Planet.
                   </em>
                 </h2>
               </ScrollReveal>
               <ScrollReveal delay={0.1}>
-                <p className="text-sm mb-8" style={{ color: "var(--warm)", lineHeight: 1.8, maxWidth: "520px" }}>
+                <p className="text-sm mb-8" style={{ color: "var(--text-on-light-body)", lineHeight: 1.8, maxWidth: "480px" }}>
                   We are committed to donating 5% of our net revenue annually to climate change mitigation and environmental awareness. Because the businesses we help build should exist on a planet worth living on.
                 </p>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-6">
                   <Link
                     href="/climate-pledge"
-                    className="flex items-center gap-2 text-xs uppercase tracking-label transition-colors hover:text-gold"
-                    style={{ color: "var(--gold)" }}
+                    className="flex items-center gap-2 text-xs uppercase transition-colors"
+                    style={{ color: "var(--gold-dim)", letterSpacing: "0.1em", fontWeight: 500, borderBottom: "1px solid var(--gold-dim)", paddingBottom: 2 }}
                   >
-                    Learn About Our Pledge <ArrowRight size={12} />
+                    Learn About Our Pledge <ArrowRight size={11} />
                   </Link>
                   <Link
                     href="/climate-pledge#partners"
-                    className="flex items-center gap-2 text-xs uppercase tracking-label transition-colors hover:text-gold"
-                    style={{ color: "var(--muted)" }}
+                    className="flex items-center gap-2 text-xs uppercase transition-colors"
+                    style={{ color: "var(--gold-dim)", letterSpacing: "0.1em", fontWeight: 500, borderBottom: "1px solid var(--gold-dim)", paddingBottom: 2 }}
                   >
-                    Our Climate Partners <ArrowRight size={12} />
+                    Our Climate Partners <ArrowRight size={11} />
                   </Link>
                 </div>
               </ScrollReveal>
             </div>
 
-            {/* Right — 40% */}
+            {/* Right — glass stat card (40%) */}
             <div className="lg:col-span-2">
               <ScrollReveal direction="right" delay={0.15}>
                 <div
                   className="p-8"
-                  style={{ background: "var(--bg-surface)", border: "1px solid var(--border)" }}
+                  style={{
+                    background: "rgba(247,243,235,0.82)",
+                    border: "1px solid rgba(201,168,76,0.3)",
+                    backdropFilter: "blur(12px)",
+                    WebkitBackdropFilter: "blur(12px)",
+                    boxShadow: "0 8px 32px rgba(26,23,16,0.12)",
+                    borderRadius: 4,
+                  }}
                 >
-                  <div className="flex items-end gap-2 mb-1">
-                    <span
-                      className="font-display"
-                      style={{ fontSize: "6rem", fontWeight: 300, color: "var(--gold)", lineHeight: 1 }}
-                    >
-                      5%
-                    </span>
-                  </div>
+                  <span
+                    className="font-display block"
+                    style={{ fontSize: "6rem", fontWeight: 300, color: "var(--gold-primary)", lineHeight: 1 }}
+                  >
+                    5%
+                  </span>
                   <p
-                    className="text-xs uppercase tracking-label mb-6"
-                    style={{ color: "var(--muted)" }}
+                    className="text-xs uppercase mb-6"
+                    style={{ color: "var(--text-on-light-muted)", letterSpacing: "0.2em", marginTop: 4 }}
                   >
                     of net revenue
                   </p>
-                  <ul className="space-y-2 mb-6">
+                  <ul className="mb-5" style={{ borderBottom: "1px solid rgba(26,23,16,0.07)" }}>
                     {climatePledge.recipients.slice(0, 3).map((r) => (
-                      <li key={r.name} className="flex items-center gap-2 text-xs" style={{ color: "var(--warm)" }}>
-                        <Leaf size={10} style={{ color: "var(--gold)", flexShrink: 0 }} />
+                      <li
+                        key={r.name}
+                        className="flex items-center gap-2 text-xs py-2"
+                        style={{ color: "var(--text-on-light-body)", borderBottom: "1px solid rgba(26,23,16,0.07)" }}
+                      >
+                        <Leaf size={10} style={{ color: "var(--gold-primary)", flexShrink: 0 }} />
                         {r.name}
                       </li>
                     ))}
                   </ul>
-                  <div
-                    className="flex items-center gap-2 text-xs pt-4"
-                    style={{ borderTop: "1px solid var(--border-subtle)", color: "var(--muted)" }}
-                  >
-                    <Leaf size={10} style={{ color: "var(--gold)" }} />
-                    <span>Member · 1% for the Planet</span>
+                  <div className="flex items-center gap-2 text-xs pt-3" style={{ color: "var(--gold-dim)" }}>
+                    <Leaf size={10} style={{ color: "var(--gold-primary)", flexShrink: 0 }} />
+                    <span style={{ fontWeight: 500 }}>Member · 1% for the Planet</span>
                   </div>
                 </div>
               </ScrollReveal>
             </div>
           </div>
         </div>
+
+        {/* Location caption — bottom right over visible reef */}
+        <div
+          className="absolute hidden lg:flex items-center gap-2 pointer-events-none"
+          style={{
+            bottom: 28,
+            right: 32,
+            zIndex: 4,
+            background: "rgba(14,13,11,0.65)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+            border: "1px solid rgba(201,168,76,0.25)",
+            borderRadius: 4,
+            padding: "8px 16px",
+          }}
+        >
+          <Leaf size={11} style={{ color: "#c9a84c" }} />
+          <span style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(232,201,106,0.9)" }}>
+            Great Barrier Reef, Queensland
+          </span>
+        </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section — LIGHT */}
       <section
-        className="relative section-padding overflow-hidden"
-        style={{ background: "var(--bg-primary)" }}
+        className="relative section-padding section-light overflow-hidden"
         aria-labelledby="cta-heading"
       >
         <div
@@ -481,7 +526,7 @@ export default function HomePage() {
         >
           <span
             className="font-display font-light whitespace-nowrap"
-            style={{ fontSize: "clamp(4rem, 12vw, 14rem)", color: "rgba(201,168,76,0.03)", letterSpacing: "-0.02em" }}
+            style={{ fontSize: "clamp(4rem, 12vw, 14rem)", color: "rgba(26,23,16,0.04)", letterSpacing: "-0.02em" }}
           >
             Digibly Group
           </span>
@@ -490,9 +535,9 @@ export default function HomePage() {
         <div className="container-wide relative z-10 text-center">
           <ScrollReveal direction="none">
             <div className="flex items-center justify-center gap-4 mb-8" aria-hidden="true">
-              <span className="w-16 h-px" style={{ background: "linear-gradient(90deg, transparent, var(--gold))" }} />
-              <span style={{ color: "var(--gold)", fontSize: "0.5rem", transform: "rotate(45deg)", display: "inline-block" }}>◆</span>
-              <span className="w-16 h-px" style={{ background: "linear-gradient(90deg, var(--gold), transparent)" }} />
+              <span className="w-16 h-px" style={{ background: "linear-gradient(90deg, transparent, var(--gold-primary))" }} />
+              <span style={{ color: "var(--gold-primary)", fontSize: "0.5rem", transform: "rotate(45deg)", display: "inline-block" }}>◆</span>
+              <span className="w-16 h-px" style={{ background: "linear-gradient(90deg, var(--gold-primary), transparent)" }} />
             </div>
           </ScrollReveal>
 
@@ -500,27 +545,27 @@ export default function HomePage() {
             <h2
               id="cta-heading"
               className="font-display mb-6"
-              style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)", fontWeight: 300, color: "var(--gold-light)", lineHeight: 1.05 }}
+              style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)", fontWeight: 300, color: "var(--text-on-light)", lineHeight: 1.05 }}
             >
               Ready to Build
-              <em className="block" style={{ fontStyle: "italic", color: "var(--cream)" }}>
+              <em className="block" style={{ fontStyle: "italic", color: "var(--gold-dim)" }}>
                 Something Lasting?
               </em>
             </h2>
           </ScrollReveal>
 
           <ScrollReveal delay={0.15}>
-            <p className="text-lg mb-10 mx-auto" style={{ color: "var(--warm)", maxWidth: "520px", lineHeight: 1.7 }}>
+            <p className="text-lg mb-10 mx-auto" style={{ color: "var(--text-on-light-body)", maxWidth: "520px", lineHeight: 1.7 }}>
               Let&apos;s talk about what you&apos;re building and how Digibly Group can help you build it right.
             </p>
           </ScrollReveal>
 
           <ScrollReveal delay={0.25}>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link href="/get-a-quote" className="btn-gold">
+              <Link href="/get-a-quote" className="btn-dark-gold">
                 Begin a Project
               </Link>
-              <Link href="/contact" className="btn-ghost">
+              <Link href="/contact" className="btn-ghost-light">
                 Schedule a Call
               </Link>
             </div>

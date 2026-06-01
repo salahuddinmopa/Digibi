@@ -46,18 +46,21 @@ export default function InvoicePage({ params }: Props) {
           </div>
         </div>
 
-        {/* Invoice document */}
+        {/* Invoice document — light/printable */}
         <div
           id="invoice-document"
-          className="p-10"
-          style={{ background: "var(--bg-surface)", border: "1px solid var(--border)" }}
+          className="section-light overflow-hidden"
+          style={{ border: "1px solid var(--border-light)", borderRadius: 8 }}
         >
-          {/* Header */}
-          <div className="flex items-start justify-between mb-10">
+          {/* Dark header strip */}
+          <div
+            className="px-10 py-8 flex items-start justify-between"
+            style={{ background: "var(--bg-primary)", borderBottom: `3px solid var(--gold-primary)` }}
+          >
             <div>
               <h1
                 className="font-display text-3xl mb-1"
-                style={{ color: "var(--gold-light)", fontWeight: 300 }}
+                style={{ color: "var(--gold-bright)", fontWeight: 500 }}
               >
                 Digibly Group
               </h1>
@@ -88,6 +91,8 @@ export default function InvoicePage({ params }: Props) {
             </div>
           </div>
 
+          {/* Light body content */}
+          <div className="p-10">
           {/* Bill to / dates */}
           <div className="grid grid-cols-2 gap-8 mb-10">
             <div>
@@ -212,11 +217,12 @@ export default function InvoicePage({ params }: Props) {
           </div>
 
           {/* Footer */}
-          <div className="text-center pt-6" style={{ borderTop: "1px solid var(--border-subtle)" }}>
-            <p className="font-display italic text-sm" style={{ color: "var(--muted)", fontWeight: 300 }}>
+          <div className="text-center pt-6" style={{ borderTop: "1px solid var(--border-light)" }}>
+            <p className="font-display italic text-sm" style={{ color: "var(--text-on-light-muted)", fontWeight: 300 }}>
               Thank you for your business. — Digibly Group
             </p>
           </div>
+          </div>{/* end light body content */}
         </div>
       </div>
     </div>

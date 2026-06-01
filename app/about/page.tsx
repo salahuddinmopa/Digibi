@@ -97,8 +97,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Story Section */}
-      <section className="section-padding" style={{ background: "var(--bg-primary)" }}>
+      {/* Story Section — LIGHT */}
+      <section className="section-padding section-light">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <ScrollReveal direction="left">
@@ -325,11 +325,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section
-        className="py-20"
-        style={{ background: "var(--bg-secondary)", borderTop: "1px solid var(--border)" }}
-      >
+      {/* Stats — LIGHT */}
+      <section className="py-20 section-light">
         <div className="container-wide">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
@@ -385,27 +382,27 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 text-center" style={{ background: "var(--bg-primary)" }}>
+      {/* CTA — LIGHT */}
+      <section className="py-24 text-center section-light">
         <div className="container-wide">
           <ScrollReveal>
             <h2
               className="font-display mb-6"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.5rem)", fontWeight: 300, color: "var(--gold-light)", lineHeight: 1.1 }}
+              style={{ fontSize: "clamp(2rem, 3.5vw, 3.5rem)", fontWeight: 300, color: "var(--text-on-light)", lineHeight: 1.1 }}
             >
               Ready to Work
-              <em className="block" style={{ fontStyle: "italic", color: "var(--cream)" }}>With Us?</em>
+              <em className="block" style={{ fontStyle: "italic", color: "var(--gold-dim)" }}>With Us?</em>
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
-            <p className="text-sm mb-8 mx-auto" style={{ color: "var(--warm)", maxWidth: "480px", lineHeight: 1.7 }}>
+            <p className="text-sm mb-8 mx-auto" style={{ color: "var(--text-on-light-body)", maxWidth: "480px", lineHeight: 1.7 }}>
               Whether you&apos;re a small business looking to grow or a government agency navigating complex governance requirements, we&apos;d love to talk.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link href="/get-a-quote" className="btn-gold">Begin a Project</Link>
-              <Link href="/contact" className="btn-ghost">Get in Touch</Link>
+              <Link href="/get-a-quote" className="btn-dark-gold">Begin a Project</Link>
+              <Link href="/contact" className="btn-ghost-light">Get in Touch</Link>
             </div>
           </ScrollReveal>
         </div>

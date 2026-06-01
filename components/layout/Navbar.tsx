@@ -42,11 +42,9 @@ export default function Navbar() {
       <header
         className="fixed top-0 left-0 right-0 z-40 transition-all duration-500"
         style={{
-          background: scrolled
-            ? "rgba(14,13,11,0.92)"
-            : "transparent",
-          backdropFilter: scrolled ? "blur(20px)" : "none",
-          borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
+          background: scrolled ? "rgba(26,23,16,0.96)" : "transparent",
+          backdropFilter: scrolled ? "blur(24px)" : "none",
+          borderBottom: scrolled ? "1px solid var(--gold-border)" : "1px solid transparent",
         }}
       >
         <div className="container-wide">
@@ -59,27 +57,28 @@ export default function Navbar() {
             >
               <span
                 className="font-display text-xl tracking-wide"
-                style={{ color: "var(--gold-light)", fontWeight: 400 }}
+                style={{ color: "var(--gold-bright)", fontWeight: 500 }}
               >
                 Digibly
               </span>
               <span
-                className="w-1.5 h-1.5 rounded-full transition-transform duration-1000 group-hover:rotate-180"
+                className="w-1.5 h-1.5 rounded-full"
                 style={{
-                  background: "var(--gold)",
-                  animation: "spin 8s linear infinite",
+                  background: "var(--gold-primary)",
+                  animation: "spin 40s linear infinite",
+                  flexShrink: 0,
                 }}
               />
               <span
                 className="font-display text-xl tracking-wide"
-                style={{ color: "var(--warm)", fontWeight: 300 }}
+                style={{ color: "var(--text-secondary)", fontWeight: 300, opacity: 0.8 }}
               >
                 Group
               </span>
             </Link>
 
             {/* Desktop nav */}
-            <ul className="hidden lg:flex items-center gap-8">
+            <ul className="hidden lg:flex items-center gap-11">
               {navLinks.map((link) => {
                 const active = pathname === link.href || pathname.startsWith(link.href + "/");
                 return (
@@ -88,8 +87,8 @@ export default function Navbar() {
                       href={link.href}
                       className="text-sm uppercase tracking-label transition-colors duration-200 relative group flex items-center gap-1.5"
                       style={{
-                        color: active ? "var(--gold)" : link.climate ? "rgba(201,168,76,0.7)" : "var(--warm)",
-                        fontWeight: 400,
+                        color: active ? "var(--gold-primary)" : link.climate ? "rgba(201,168,76,0.75)" : "var(--text-secondary)",
+                        fontWeight: 500,
                       }}
                     >
                       {link.climate && <Leaf size={11} />}
@@ -133,7 +132,7 @@ export default function Navbar() {
       {menuOpen && (
         <div
           className="fixed inset-0 z-30 flex flex-col pt-24 pb-10 px-6"
-          style={{ background: "rgba(14,13,11,0.98)" }}
+          style={{ background: "rgba(26,23,16,0.98)" }}
         >
           <nav>
             <ul className="space-y-1">

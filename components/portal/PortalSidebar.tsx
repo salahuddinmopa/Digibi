@@ -58,8 +58,9 @@ export default function PortalSidebar() {
                   className="flex items-center gap-3 px-3 py-2.5 text-sm transition-all duration-200"
                   style={{
                     background: active ? "rgba(201,168,76,0.1)" : "transparent",
-                    color: active ? "var(--gold-light)" : "var(--warm)",
-                    borderLeft: active ? "2px solid var(--gold)" : "2px solid transparent",
+                    color: active ? "var(--gold-bright)" : "var(--text-secondary)",
+                    borderLeft: active ? "3px solid var(--gold-primary)" : "3px solid transparent",
+                    borderRadius: active ? "0 8px 8px 0" : "0",
                   }}
                 >
                   <Icon size={16} style={{ color: active ? "var(--gold)" : "var(--muted)" }} />

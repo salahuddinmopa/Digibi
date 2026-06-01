@@ -30,8 +30,8 @@ export default function ServicePageContent({ serviceId, skipHero = false }: Serv
         />
       )}
 
-      {/* Deliverables + Target Clients */}
-      <section className="section-padding" style={{ background: "var(--bg-primary)" }}>
+      {/* Deliverables + Target Clients — LIGHT */}
+      <section className="section-padding section-light">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Deliverables */}
@@ -147,8 +147,8 @@ export default function ServicePageContent({ serviceId, skipHero = false }: Serv
         </div>
       </section>
 
-      {/* Tools */}
-      <section className="section-padding" style={{ background: "var(--bg-primary)" }}>
+      {/* Tools + Pricing preview — LIGHT */}
+      <section className="section-padding section-light">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <ScrollReveal>
@@ -270,27 +270,27 @@ export default function ServicePageContent({ serviceId, skipHero = false }: Serv
         </section>
       )}
 
-      {/* CTA */}
-      <section className="py-24 text-center" style={{ background: "var(--bg-primary)" }}>
+      {/* CTA — LIGHT */}
+      <section className="py-20 text-center section-light">
         <div className="container-wide">
           <ScrollReveal>
             <h2
               className="font-display mb-6"
-              style={{ fontSize: "clamp(2rem, 3vw, 3rem)", fontWeight: 300, color: "var(--gold-light)", lineHeight: 1.1 }}
+              style={{ fontSize: "clamp(2rem, 3vw, 3rem)", fontWeight: 300, color: "var(--text-on-light)", lineHeight: 1.1 }}
             >
               Ready to get started with
-              <em className="block" style={{ fontStyle: "italic", color: "var(--cream)" }}>
+              <em className="block" style={{ fontStyle: "italic", color: "var(--gold-dim)" }}>
                 {service.title}?
               </em>
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
-            <p className="text-sm mb-8 mx-auto" style={{ color: "var(--warm)", maxWidth: "440px", lineHeight: 1.7 }}>
+            <p className="text-sm mb-8 mx-auto" style={{ color: "var(--text-on-light-body)", maxWidth: "440px", lineHeight: 1.7 }}>
               Submit your brief and we&apos;ll come back with a detailed, no-obligation quote within 24 hours.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
-            <Link href={`/get-a-quote?service=${service.id}`} className="btn-gold">
+            <Link href={`/get-a-quote?service=${service.id}`} className="btn-dark-gold">
               Get a Quote for This Service
             </Link>
           </ScrollReveal>
